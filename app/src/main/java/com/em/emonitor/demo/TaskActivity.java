@@ -17,7 +17,6 @@ public class TaskActivity extends AppCompatActivity {
         btnContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //业务逻辑
             }
         });
     }
