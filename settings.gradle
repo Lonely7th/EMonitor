@@ -1,0 +1,1 @@
+include ':app', ':emonitorplugin', ':emonitorcore'
