@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 
 android {
     compileSdkVersion 27
@@ -39,15 +39,15 @@ repositories {
 }
 
 //group和version
-group='com.em.emonitor'
-version='1.0.2'
+//group='com.em.emonitor'
+//version='1.0.2'
 
 //打包到本地或者远程Maven库
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            //本地的Maven地址设置为D:/Maven
-            repository(url: uri('D:/Maven'))
-        }
-    }
-}
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            //本地的Maven地址设置为D:/Maven
+//            repository(url: uri('D:/Maven'))
+//        }
+//    }
+//}
