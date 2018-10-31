@@ -43,4 +43,20 @@ public class StatisticsBean {
     public void setCurrentTime(long currentTime) {
         this.currentTime = currentTime;
     }
+
+    public String getEventStr(){
+        String strEvent = "";
+        switch (event){
+            case 0:
+                strEvent = "onResume";
+                break;
+            case 1:
+                strEvent = "onPause";
+                break;
+            case 2:
+                strEvent = "onClick";
+                break;
+        }
+        return strEvent;
+    }
 }

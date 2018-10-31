@@ -1,5 +1,7 @@
 package com.em.emonitor.core;
 
+import android.content.Context;
+
 import com.em.emonitor.bean.StatisticsBean;
 import com.em.emonitor.callback.EmClickListener;
 import com.em.emonitor.callback.EmEventListener;
@@ -13,6 +15,7 @@ import com.em.emonitor.utils.StatisticsUtil;
  * Description ：接口管理类 .
  */
 public class EmBaseTask {
+    private Context context;
     private static EmBaseTask emBaseTask = null;
 
     private EmClickListener emClickListener;
@@ -21,6 +24,11 @@ public class EmBaseTask {
     private StatisticsListener statisticsListener;
 
     public EmBaseTask(){
+
+    }
+
+    public void init(Context context){
+        this.context = context;
         initStatistics();
     }
 
@@ -79,7 +87,7 @@ public class EmBaseTask {
             @Override
             public void onStatistics(StatisticsBean statisticsBean) {
                 //统计用户行为
-                StatisticsUtil.statistics(statisticsBean);
+                StatisticsUtil.statistics(context,statisticsBean);
             }
         };
     }
