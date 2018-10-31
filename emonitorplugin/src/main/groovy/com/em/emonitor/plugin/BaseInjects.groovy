@@ -13,6 +13,11 @@ import org.gradle.api.Project
 public class BaseInjects {
     //监听点击事件的代码
     private final static String codeClickEvent = "com.em.emonitor.core.manager.EmClickManager.EMonitorClick(getClass().getSimpleName(), v);"
+    private final static String codeResumeEvent = "com.em.emonitor.core.manager.EmEventManager.onEvent(getClass().getSimpleName(), com.em.emonitor.core.ContentKey.EmOnResume);"
+    private final static String codePauseEvent = "com.em.emonitor.core.manager.EmEventManager.onEvent(getClass().getSimpleName(), com.em.emonitor.core.ContentKey.EmOnPause);"
+
+    private final static String codeResumeFun = "protected void onResume() { super.onResume(); }"
+
     //初始化类池
     private final static ClassPool pool = ClassPool.getDefault()
 
@@ -39,26 +44,42 @@ public class BaseInjects {
                     //获取.class文件
                     println("class = " + getPackagebyFilePath(filePath))
                     CtClass ctClass = pool.getCtClass(getPackagebyFilePath(filePath))
+                    println("superClass = " + ctClass.getSuperclass().name)
+                    if (ctClass.isFrozen()){
+                        //解冻
+                        ctClass.defrost()
+                    }
+                    boolean inResume = false
+                    boolean inPause = false
                     //获取.class中的全部方法
                     for(CtMethod ctMethod : ctClass.getDeclaredMethods()){
                         println("ctMethod = " + ctMethod)
-                        //添加点击事件监听
-                        if(ctMethod.getName().equals("onClick")){
-                            if (ctClass.isFrozen()){//解冻
-                                ctClass.defrost()
-                            }
-                            //待添加的代码
-                            String insetBeforeStr = codeClickEvent
-                            //在方法开头插入代码
-                            ctMethod.insertBefore(insetBeforeStr)
-                            //添加相关引用
-                            ctClass.writeFile(path)
-                            ctClass.detach()//释放
-                        }else{
-                            //处理单个控件设置监听的情况
+                        switch (ctMethod.getName()){
+                            case "onClick":
+                                //在方法开头插入代码
+                                ctMethod.insertBefore(codeClickEvent)
+                                break
+                            case "onResume":
+                                inResume = true
+                                ctMethod.insertBefore(codeResumeEvent)
+                                break
+                            case "onPause":
+                                inPause = true
+                                ctMethod.insertBefore(codePauseEvent)
+                                break
                         }
-                        //添加浏览事件监听
                     }
+                    if(ctClass.getSuperclass().name.contains("Activity") && !inResume){
+                        //如果不存在onResume方法则添加
+                        ctClass.addMethod(CtMethod.make(codeResumeFun, ctClass))
+                    }
+                    if(!inPause){
+                        //如果不存在onPause方法则添加
+//                        ctClass.addMethod(CtMethod.make("public int getAge(){return this.age;}", ctClass))
+                    }
+                    ctClass.writeFile(path)
+                    //释放
+                    ctClass.detach()
                 }
             }
         }

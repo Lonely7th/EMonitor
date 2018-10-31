@@ -20,7 +20,9 @@ public class EmBaseTask {
     private EmEventListener emEventListener;
     private StatisticsListener statisticsListener;
 
-    public EmBaseTask(){}
+    public EmBaseTask(){
+        initStatistics();
+    }
 
     public static synchronized EmBaseTask getInstance(){
         if(emBaseTask == null){

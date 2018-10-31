@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.em.emonitor.bean.EmEventBean;
 import com.em.emonitor.bean.SingleClickBean;
 import com.em.emonitor.callback.EmClickListener;
+import com.em.emonitor.callback.EmEventListener;
 import com.em.emonitor.core.EmBaseTask;
 
 
@@ -27,6 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(SingleClickBean singleClickBean) {
                 android.widget.Toast.makeText(MainActivity.this,singleClickBean.getView().getId()+"",android.widget.Toast.LENGTH_SHORT).show();
+            }
+        });
+        EmBaseTask.getInstance().setEmEventListener(new EmEventListener() {
+            @Override
+            public void EmOnResume(EmEventBean emEventBean) {
+                android.widget.Toast.makeText(MainActivity.this,emEventBean.getClassName() + "EmOnResume",android.widget.Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void EmOnPause(EmEventBean emEventBean) {
+                android.widget.Toast.makeText(MainActivity.this,emEventBean.getClassName() + "EmOnPause",android.widget.Toast.LENGTH_SHORT).show();
             }
         });
         startActivity(new Intent(this,TaskActivity.class));

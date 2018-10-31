@@ -23,7 +23,14 @@ public class EmEventManager extends EmBaseManager{
             EmEventBean emEventBean = new EmEventBean();
             emEventBean.setClassName(className);
             emEventBean.setStatus(event);
-            EmBaseTask.getInstance().getEmEventListener().onEvent(emEventBean);
+            switch (event){
+                case ContentKey.EmOnResume:
+                    EmBaseTask.getInstance().getEmEventListener().EmOnResume(emEventBean);
+                    break;
+                case ContentKey.EmOnPause:
+                    EmBaseTask.getInstance().getEmEventListener().EmOnPause(emEventBean);
+                    break;
+            }
 
             //提交到统计模块
             StatisticsBean statisticsBean = new StatisticsBean();

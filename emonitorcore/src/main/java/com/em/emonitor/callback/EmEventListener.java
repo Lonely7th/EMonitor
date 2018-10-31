@@ -8,5 +8,6 @@ import com.em.emonitor.bean.EmEventBean;
  * Description ： .
  */
 public interface EmEventListener {
-    public void onEvent(EmEventBean emEventBean);
+    void EmOnResume(EmEventBean emEventBean);
+    void EmOnPause(EmEventBean emEventBean);
 }

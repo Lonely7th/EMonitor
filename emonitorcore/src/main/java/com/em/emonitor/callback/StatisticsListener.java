@@ -8,5 +8,5 @@ import com.em.emonitor.bean.StatisticsBean;
  * Description ： .
  */
 public interface StatisticsListener {
-    public void onStatistics(StatisticsBean statisticsBean);
+    void onStatistics(StatisticsBean statisticsBean);
 }
