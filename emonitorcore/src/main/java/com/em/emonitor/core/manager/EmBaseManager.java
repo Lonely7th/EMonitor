@@ -5,5 +5,10 @@ package com.em.emonitor.core.manager;
  * Author ： JN Zhang .
  * Description ： .
  */
-public class EmBaseManager {
+public abstract class EmBaseManager {
+
+    static void statistics(){
+
+    }
+
 }
