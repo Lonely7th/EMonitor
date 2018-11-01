@@ -16,7 +16,8 @@ public class BaseInjects {
     private final static String codeResumeEvent = "com.em.emonitor.core.manager.EmEventManager.onEvent(getClass().getSimpleName(), com.em.emonitor.core.ContentKey.EmOnResume);"
     private final static String codePauseEvent = "com.em.emonitor.core.manager.EmEventManager.onEvent(getClass().getSimpleName(), com.em.emonitor.core.ContentKey.EmOnPause);"
 
-    private final static String codeResumeFun = "protected void onResume() { super.onResume(); }"
+    private final static String codeResumeFun = "protected void onResume() { super.onResume(); " + codeResumeEvent + " }"
+    private final static String codePauseFun = "protected void onPause() { super.onPause(); " + codePauseEvent + " }"
 
     //初始化类池
     private final static ClassPool pool = ClassPool.getDefault()
@@ -73,9 +74,9 @@ public class BaseInjects {
                         //如果不存在onResume方法则添加
                         ctClass.addMethod(CtMethod.make(codeResumeFun, ctClass))
                     }
-                    if(!inPause){
+                    if(ctClass.getSuperclass().name.contains("Activity") && !inPause){
                         //如果不存在onPause方法则添加
-//                        ctClass.addMethod(CtMethod.make("public int getAge(){return this.age;}", ctClass))
+                        ctClass.addMethod(CtMethod.make(codePauseFun, ctClass))
                     }
                     ctClass.writeFile(path)
                     //释放

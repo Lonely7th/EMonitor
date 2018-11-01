@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvCount = findViewById(R.id.tv_count);
         tvCount.setOnClickListener(this);
 
+        EmBaseTask.getInstance().init(MainActivity.this);
         EmBaseTask.getInstance().setEmClickListener(new EmClickListener() {
             @Override
             public void onClick(SingleClickBean singleClickBean) {
