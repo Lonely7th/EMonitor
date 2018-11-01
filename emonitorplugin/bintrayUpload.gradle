@@ -14,7 +14,7 @@ install {
         // 生成pom.xml和参数
         pom {
             project {
-                packaging 'jar'
+                //packaging 'aar'
                 // 项目描述，复制我的话，这里需要修改。
                 name 'EmonitorPlugin'// 可选，项目名称。
                 description 'A Plugin on Android'// 可选，项目描述。
@@ -87,6 +87,7 @@ bintray {
         userOrg = 'jnzhang'//Bintray的组织id
         websiteUrl = siteUrl
         vcsUrl = gitUrl
+        labels = ['gradle', 'plugin']
         licenses = ["Apache-2.0"]
         publish = true // 是否是公开项目。
     }
