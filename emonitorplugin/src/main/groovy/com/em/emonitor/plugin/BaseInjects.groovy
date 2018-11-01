@@ -41,11 +41,12 @@ public class BaseInjects {
             dir.eachFileRecurse { File file ->
                 String filePath = file.absolutePath
                 println("filePath = " + filePath)
-                if (!getPackagebyFilePath(filePath).equals("")){
+                if (filePath.endsWith(".class") && !filePath.contains('R$') && !filePath.contains('R.class')
+                        && !filePath.contains("BuildConfig.class") && !getPackagebyFilePath(filePath).equals("")){
                     //获取.class文件
                     println("class = " + getPackagebyFilePath(filePath))
                     CtClass ctClass = pool.getCtClass(getPackagebyFilePath(filePath))
-                    println("superClass = " + ctClass.getSuperclass().name)
+                    println("superClass = " + ctClass.getName())
                     if (ctClass.isFrozen()){
                         //解冻
                         ctClass.defrost()
@@ -54,7 +55,7 @@ public class BaseInjects {
                     boolean inPause = false
                     //获取.class中的全部方法
                     for(CtMethod ctMethod : ctClass.getDeclaredMethods()){
-                        println("ctMethod = " + ctMethod)
+                        println("ctMethod = " + ctMethod.name)
                         switch (ctMethod.getName()){
                             case "onClick":
                                 //在方法开头插入代码
