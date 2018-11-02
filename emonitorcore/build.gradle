@@ -38,20 +38,20 @@ dependencies {
 //apply from: "bintrayUpload.gradle"
 
 //打包到本地Maven库
-//apply plugin: 'maven'
-//
-//group='com.em.emonitor'
-//version='1.0.8'
+apply plugin: 'maven'
+
+group='com.em.emonitor'
+version='1.0.8'
 
 repositories {
     mavenCentral()
 }
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            //本地的Maven地址设置为D:/Maven
-//            repository(url: uri('D:/Maven'))
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //本地的Maven地址设置为D:/Maven
+            repository(url: uri('D:/Maven'))
+        }
+    }
+}

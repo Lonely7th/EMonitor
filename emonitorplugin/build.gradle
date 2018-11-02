@@ -6,7 +6,7 @@ dependencies {
     implementation 'com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api'
     implementation 'commons-io:commons-io:2.5'
 
-    implementation 'javassist:javassist:3.12.1.GA'
+    compile 'javassist:javassist:3.12.1.GA'
 
     //gradle sdk
     compile gradleApi()
@@ -16,23 +16,23 @@ dependencies {
 
 
 //打包到本地Maven库
-//apply plugin: 'maven'
-//
-//group='com.em.emonitor'
-//version='1.0.2'
+apply plugin: 'maven'
+
+group='com.em.emonitor'
+version='1.0.3'
 
 repositories {
     mavenCentral()
 }
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            //本地的Maven地址设置为D:/Maven
-//            repository(url: uri('D:/Maven'))
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //本地的Maven地址设置为D:/Maven
+            repository(url: uri('D:/Maven'))
+        }
+    }
+}
 
 //打包到远程仓库
-apply from: "bintrayUpload.gradle"
+//apply from: "bintrayUpload.gradle"

@@ -59,7 +59,9 @@ public class BaseInjects {
                         switch (ctMethod.getName()){
                             case "onClick":
                                 //在方法开头插入代码
-                                ctMethod.insertBefore(codeClickEvent)
+                                if(ctMethod.getMethodInfo().getCodeAttribute() != null){
+                                    ctMethod.insertBefore(codeClickEvent)
+                                }
                                 break
                             case "onResume":
                                 inResume = true
@@ -98,7 +100,14 @@ public class BaseInjects {
         if(!filePath.contains(".class")){
             return ""
         }
-        String strPackage = filePath.substring(filePath.indexOf("classes")+"classes".length()+1)
+        String strPackage
+        if(filePath.contains("classes\\debug")){
+            strPackage = filePath.substring(filePath.indexOf("classes\\debug")+"classes\\debug".length()+1)
+        }else if(filePath.contains("classes\\release")){
+            strPackage = filePath.substring(filePath.indexOf("classes\\release")+"classes\\release".length()+1)
+        } else{
+            strPackage = filePath.substring(filePath.indexOf("classes")+"classes".length()+1)
+        }
         strPackage = strPackage.replace(".class","")
         strPackage = strPackage.replace("\\",".")
         return strPackage

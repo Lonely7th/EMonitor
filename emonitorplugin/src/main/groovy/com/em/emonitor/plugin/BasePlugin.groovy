@@ -3,7 +3,7 @@ package com.em.emonitor.plugin
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
 import org.gradle.api.Plugin
-import org.gradle.api.Project;
+import org.gradle.api.Project
 
 /**
  * Time ： 2018/10/24 .
@@ -13,7 +13,6 @@ import org.gradle.api.Project;
 public class BasePlugin implements Plugin<Project> {
 
     void apply(Project project) {
-        System.out.println("------------------start----------------------")
         //AppExtension就是build.gradle中android{...}这一块
         def android = project.extensions.getByType(AppExtension)
 
@@ -60,7 +59,6 @@ public class BasePlugin implements Plugin<Project> {
 //            }
 //
 //        }
-        System.out.println("------------------end----------------------")
     }
 
 //    static def void createJavaTest(variant, config) {

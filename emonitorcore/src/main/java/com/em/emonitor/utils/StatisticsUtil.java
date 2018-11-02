@@ -27,8 +27,8 @@ public class StatisticsUtil {
         }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getDateToString(statisticsBean.getCurrentTime(),"yyyy-MM-dd HH:mm:ss")).append(" ");
-        stringBuilder.append(statisticsBean.getClassName()).append(" ");
-        stringBuilder.append(statisticsBean.getEventStr()).append(" ");
+        stringBuilder.append(statisticsBean.getEventStr()).append("/");
+        stringBuilder.append(statisticsBean.getClassName()).append(": ");
         if(!TextUtils.isEmpty(statisticsBean.getViewId())){
             stringBuilder.append(statisticsBean.getViewId());
         }
@@ -37,7 +37,7 @@ public class StatisticsUtil {
         Log.d(TAG,stringBuilder.toString().trim());
         //保存日志
         try {
-            String path = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/emonitor_log.txt";
+            String path = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/emonitor_log.log";
             // 创建文件对象
             File fileText = new File(path);
             // 向文件写入对象写入信息

@@ -1,20 +1,20 @@
 //打包到远程Maven库
-apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 // 定义两个链接，下面会用到。
 def siteUrl = 'https://github.com/Lonely7th/EMonitor' // 项目主页。
 def gitUrl = 'https://github.com/Lonely7th/EMonitor.git' // Git仓库的url。
 
 group = "com.emonitor.core"// 唯一包名,比如compile 'com.ansen.http:okhttpencapsulation:1.0.1'中的com.ansen.http就是这里配置的。
-version = "1.3.1"//项目引用的版本号，比如compile 'com.ansen.http:okhttpencapsulation:1.0.1'中的1.0.1就是这里配置的。
+version = "1.4.8"//项目引用的版本号，比如compile 'com.ansen.http:okhttpencapsulation:1.0.1'中的1.0.1就是这里配置的。
 
 install {
     repositories.mavenInstaller {
         // 生成pom.xml和参数
         pom {
             project {
-                //packaging 'aar'
+                packaging 'aar'
                 // 项目描述，复制我的话，这里需要修改。
                 name 'EmonitorPlugin'// 可选，项目名称。
                 description 'A Plugin on Android'// 可选，项目描述。
@@ -48,30 +48,36 @@ install {
     }
 }
 
-// 生成jar包的task，不需要修改。
-//task sourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier = 'sources'
-//}
+tasks.withType(Javadoc) {//防止编码问题
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
 
-// 生成jarDoc的task，不需要修改。
-//task javadoc(type: Javadoc) {
-//    options.encoding = "utf-8"
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//    // destinationDir = file("../javadoc/")
-//    failOnError false // 忽略注释语法错误，如果用jdk1.8你的注释写的不规范就编译不过。
-//}
-
-// 生成javaDoc的jar，不需要修改。
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-//artifacts {
-//    archives javadocJar
-//    archives sourcesJar
-//}
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+}
+else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
 
 // 这里是读取Bintray相关的信息，我们上传项目到github上的时候会把gradle文件传上去，所以不要把帐号密码的信息直接写在这里，写在local.properties中，这里动态读取。
 Properties properties = new Properties()
@@ -90,5 +96,6 @@ bintray {
         labels = ['gradle', 'plugin']
         licenses = ["Apache-2.0"]
         publish = true // 是否是公开项目。
+        publicDownloadNumbers = true
     }
 }
