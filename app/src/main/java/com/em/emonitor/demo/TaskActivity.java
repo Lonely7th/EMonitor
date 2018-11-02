@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class TaskActivity extends AppCompatActivity {
+public class TaskActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnContent;
 
     @Override
@@ -13,12 +13,11 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         btnContent = findViewById(R.id.btn_content);
-
-        btnContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        findViewById(R.id.btn_content).setOnClickListener(this);
+        findViewById(R.id.btn_content2).setOnClickListener(this);
+        findViewById(R.id.btn_content3).setOnClickListener(this);
+        findViewById(R.id.btn_content4).setOnClickListener(this);
+        findViewById(R.id.btn_content5).setOnClickListener(this);
     }
 
     @Override
@@ -29,5 +28,21 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_content:
+                break;
+            case R.id.btn_content2:
+                break;
+            case R.id.btn_content3:
+                break;
+            case R.id.btn_content4:
+                break;
+            case R.id.btn_content5:
+                break;
+        }
     }
 }
