@@ -7,18 +7,17 @@ import android.view.ViewGroup;
 /**
  * Time ： 2018/10/31 .
  * Author ： JN Zhang .
- * Description ： .
+ * Description ：获取View的ViewPath .
  */
 public class ViewIdUtil {
 
     public static String getId(String className, View view){
-        Log.d("ViewIdUtil","path = " + getPath(view));
+        Log.d("ViewIdUtil","className = " + className + "path = " + getPath(view));
         return getPath(view);
     }
 
-    public static String getPath(View view) {
+    private static String getPath(View view) {
         //构造ViewPath中于view对应的节点:ViewType[index],获取view在兄弟节点中的index
-        View rootView = view.getRootView();
         StringBuilder ViewPath = new StringBuilder();
         while(view.getParent() instanceof ViewGroup){
             String ViewType=view.getClass().getSimpleName();

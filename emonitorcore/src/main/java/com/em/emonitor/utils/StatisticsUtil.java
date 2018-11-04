@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.em.emonitor.bean.StatisticsBean;
+import com.em.emonitor.core.ContentKey;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,7 +17,7 @@ import java.util.Date;
 /**
  * Time ： 2018/10/31 .
  * Author ： JN Zhang .
- * Description ： .
+ * Description ：数据统计工具 .
  */
 public class StatisticsUtil {
     private static final String TAG = "EmLog";
@@ -27,10 +28,13 @@ public class StatisticsUtil {
         }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getDateToString(statisticsBean.getCurrentTime(),"yyyy-MM-dd HH:mm:ss")).append(" ");
-        stringBuilder.append(statisticsBean.getEventStr()).append("/");
-        stringBuilder.append(statisticsBean.getClassName()).append(": ");
+        stringBuilder.append(statisticsBean.getClassName()).append("/");
+        stringBuilder.append(statisticsBean.getEventStr()).append(": ");
         if(!TextUtils.isEmpty(statisticsBean.getViewId())){
             stringBuilder.append(statisticsBean.getViewId());
+        }
+        if(statisticsBean.getEvent() == ContentKey.EmOnItemClick){
+            stringBuilder.append(" ").append("Item[").append(statisticsBean.getIndex()).append("]");
         }
         stringBuilder.append("\n");
         //打印日志

@@ -13,6 +13,7 @@ import org.gradle.api.Project
 public class BaseInjects {
     //监听点击事件的代码
     private final static String codeClickEvent = "com.em.emonitor.core.manager.EmClickManager.EMonitorClick(getClass().getSimpleName(), v);"
+    private final static String codeItemClickEvent = "com.em.emonitor.core.manager.EmClickManager.EMonitorItemClick(getClass().getSimpleName(), view, position);"
     private final static String codeResumeEvent = "com.em.emonitor.core.manager.EmEventManager.onEvent(getClass().getSimpleName(), com.em.emonitor.core.ContentKey.EmOnResume);"
     private final static String codePauseEvent = "com.em.emonitor.core.manager.EmEventManager.onEvent(getClass().getSimpleName(), com.em.emonitor.core.ContentKey.EmOnPause);"
 
@@ -61,6 +62,12 @@ public class BaseInjects {
                                 //在方法开头插入代码
                                 if(ctMethod.getMethodInfo().getCodeAttribute() != null){
                                     ctMethod.insertBefore(codeClickEvent)
+                                }
+                                break
+                            case "onItemClick":
+                                //在方法开头插入代码
+                                if(ctMethod.getMethodInfo().getCodeAttribute() != null){
+                                    ctMethod.insertBefore(codeItemClickEvent)
                                 }
                                 break
                             case "onResume":

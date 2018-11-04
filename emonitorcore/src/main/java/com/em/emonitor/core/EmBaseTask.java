@@ -23,9 +23,7 @@ public class EmBaseTask {
     private EmEventListener emEventListener;
     private StatisticsListener statisticsListener;
 
-    public EmBaseTask(){
-
-    }
+    public EmBaseTask(){}
 
     public void init(Context context){
         this.context = context;

@@ -6,9 +6,4 @@ package com.em.emonitor.core.manager;
  * Description ： .
  */
 public abstract class EmBaseManager {
-
-    static void statistics(){
-
-    }
-
 }

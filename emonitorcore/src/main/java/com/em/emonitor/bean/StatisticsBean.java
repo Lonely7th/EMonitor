@@ -3,14 +3,15 @@ package com.em.emonitor.bean;
 /**
  * Time ： 2018/10/31 .
  * Author ： JN Zhang .
- * Description ： .
+ * Description ：数据统计模型 .
  */
 public class StatisticsBean {
     private String className;
-    //0.onResume  1.onPause  2.onClick
-    private int event;
+    private int event;//0.onResume  1.onPause  2.onClick  3.onItemClick
     private String viewId;
     private long currentTime;
+
+    private int index;
 
     public String getClassName() {
         return className;
@@ -44,6 +45,14 @@ public class StatisticsBean {
         this.currentTime = currentTime;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getEventStr(){
         String strEvent = "";
         switch (event){
@@ -55,6 +64,9 @@ public class StatisticsBean {
                 break;
             case 2:
                 strEvent = "onClick";
+                break;
+            case 3:
+                strEvent = "onItemClick";
                 break;
         }
         return strEvent;
