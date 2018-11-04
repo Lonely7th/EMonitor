@@ -6,7 +6,7 @@ EMonitor是一款非侵入式的数据采集框架，开发者不需要改动任
 
 **1.引入EMonitor库，2.初始化EmBaseTask，3.实现相关接口**
 
-#1.引入EMonitor库
+**1.引入EMonitor库**
 在project下的build.gradle文件中添加依赖：
 ```
 maven {url 'https://dl.bintray.com/jnzhang/EMonitor'}
@@ -19,7 +19,7 @@ apply plugin: 'emplugin'
 
 implementation 'com.emonitor.core:emonitorcore:1.3.1'
 ```
-#2.初始化EmBaseTask
+**2.初始化EmBaseTask**
 在应用程序的入口初始化EmBaseTask：
 ```
 EmBaseTask.getInstance().init(context);
@@ -41,7 +41,7 @@ EmBaseTask.getInstance().init(context);
 2018-11-02 16:47:02 onPause/TaskActivity: 
 2018-11-02 16:47:02 onResume/MainActivity: 
 ```
-#3.实现相关接口
+**3.实现相关接口**
 很多时候EMonitor自带的Log文件并不能满足开发者的需求，EMonitor也提供了一些接口，开发者可以调用这些接口来实现自己的业务逻辑。
 
 *3.1调用用户点击某个控件的监听：*
