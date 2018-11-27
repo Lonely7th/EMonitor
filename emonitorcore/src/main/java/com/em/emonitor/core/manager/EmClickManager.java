@@ -18,10 +18,10 @@ public class EmClickManager extends EmBaseManager{
 
     /**
      * 点击事件监听器
-     * @param name 控件所属类名
      * @param v 被点击的控件
      */
-    public static void EMonitorClick(String name, View v){
+    public static void EMonitorClick(View v){
+        String name = v.getClass().getSimpleName();
         if(EmBaseTask.getInstance().getEmClickListener() != null){
             SingleClickBean singleClickBean = new SingleClickBean();
             singleClickBean.setClassName(name);
@@ -40,11 +40,11 @@ public class EmClickManager extends EmBaseManager{
 
     /**
      * Item点击事件监听器
-     * @param name 控件所属类名
      * @param v 被点击的控件
      * @param index 被点击项的索引
      */
-    public static void EMonitorItemClick(String name, View v, int index){
+    public static void EMonitorItemClick(View v, int index){
+        String name = v.getClass().getSimpleName();
         if(EmBaseTask.getInstance().getEmItemClickListener() != null){
             ItemClickBean itemClickBean = new ItemClickBean();
             itemClickBean.setClassName(name);
