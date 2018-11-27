@@ -1,4 +1,4 @@
-package com.em.emonitor.plugin
+package com.em.emonitor.plugin.core
 
 import javassist.ClassPool
 import javassist.CtClass
@@ -10,7 +10,7 @@ import org.gradle.api.Project
  * Author ： JN Zhang .
  * Description ： .
  */
-public class BaseInjects {
+class BaseInjects {
     //监听点击事件的代码
     private final static String codeClickEvent = "com.em.emonitor.core.manager.EmClickManager.EMonitorClick(getClass().getSimpleName(), v);"
     private final static String codeItemClickEvent = "com.em.emonitor.core.manager.EmClickManager.EMonitorItemClick(getClass().getSimpleName(), view, position);"
@@ -24,11 +24,11 @@ public class BaseInjects {
     private final static ClassPool pool = ClassPool.getDefault()
 
     //引入关联的jar包
-    public static void setClassPath(String path) {
+    static void setClassPath(String path) {
         pool.appendClassPath(path)
     }
 
-    public static void inject(String path, Project project) {
+    static void inject(String path, Project project) {
         //将当前路径加入类池
         pool.appendClassPath(path)
         //project.android.bootClasspath 加入android.jar
