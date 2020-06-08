@@ -38,7 +38,7 @@ EmBaseTask.getInstance().init(context);
 ```
 **3.实现相关接口**
 
-很多时候EMonitor自带的Log文件并不能满足开发者的需求，EMonitor也提供了一些接口，开发者可以调用这些接口来实现自己的业务逻辑。
+如果EMonitor自带的Log文件不能满足你的需求，EMonitor也提供了一些接口，你可以调用这些接口来自定义业务逻辑。
 
 *3.1调用用户点击某个控件的监听：*
 ```
