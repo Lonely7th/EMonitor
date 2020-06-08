@@ -71,4 +71,3 @@ EmBaseTask.getInstance().init(context);
         }
     });
 ```
-EMonitor框架接下来将会逐步添加列表浏览事件监测和用户地理位置监测等功能。
